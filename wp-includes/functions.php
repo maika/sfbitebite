@@ -193,6 +193,11 @@ function size_format( $bytes, $decimals = 0 ) {
 	return false;
 }
 
+function shortcontent($limit){
+	$content = strip_tags( get_the_content() );
+	$content = mb_substr($content, 0, $limit)."...";
+	return $content;
+}
 /**
  * Get the week start and end from the datetime or date string from mysql.
  *

@@ -15,7 +15,8 @@
 			<?php endif; ?>
 			<?php if( ! is_category( pinboard_get_option( 'portfolio_cat' ) ) && ! ( is_category() && cat_is_ancestor_of( pinboard_get_option( 'portfolio_cat' ), get_queried_object() ) ) ) : ?>
 				<div class="entry-summary">
-					<?php the_excerpt(); ?>
+				<!--<?php the_excerpt(); ?> -->
+					<?php echo shortcontent(180);?>
 				</div><!-- .entry-summary -->
 			<?php endif; ?>
 			<div class="clear"></div>
