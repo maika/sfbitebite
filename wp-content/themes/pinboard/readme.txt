@@ -124,6 +124,7 @@ and sticky posts will appear only in the slider.
 
 = The slider is disproportioned =
 
+
 You need to set a featured image of at least 1140x395 for the slider's proportions to align.
 The slider cannot be given fixed proportions for compatibility with the responsive layout.
 
