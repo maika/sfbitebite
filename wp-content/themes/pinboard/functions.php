@@ -1506,7 +1506,7 @@ endif;
 
 if ( ! function_exists( 'pinboard_entry_meta' ) ) :
 /**
- * Output entry-meta tag
+ * Output entry-meta tag... Removed permalink from entry.
  *
  * @since Pinboard 1.0
  */
@@ -1534,9 +1534,9 @@ function pinboard_entry_meta() {
 					<span class="attachment-size"><a href="<?php echo wp_get_attachment_url(); ?>" title="<?php _e( 'Link to full-size image', 'pinboard' ); ?>"><?php $metadata = wp_get_attachment_metadata(); echo $metadata['width']; ?> &times; <?php echo $metadata['height']; ?></a> <?php _e( 'pixels', 'pinboard' ); ?></span>
 				<?php endif; ?>
 				<?php edit_post_link( __( 'Edit', 'pinboard' ), '<span class="edit-link">', '</span>' ); ?>
-				<?php if( ! is_singular() ) : ?>
-					<span class="entry-permalink"><a href="<?php echo get_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute(); ?>">Permalink</a></span>
-				<?php endif; ?>
+				<!-- <?php if( ! is_singular() ) : ?> -->
+					<!-- <span class="entry-permalink"><a href="<?php echo get_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute(); ?>">Permalink</a></span> -->
+				<!-- <?php endif; ?> -->
 			<?php endif; ?>
 			<div class="clear"></div>
 		</aside><!-- .entry-meta -->
