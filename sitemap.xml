@@ -19,6 +19,12 @@
   <loc>http://sfbitebite.com/bi-rite-creamery/</loc>
 </url>
 <url>
+  <loc>http://sfbitebite.com/hog-island-oyster/</loc>
+</url>
+<url>
+  <loc>http://sfbitebite.com/bouchon/</loc>
+</url>
+<url>
   <loc>http://sfbitebite.com/tcho/</loc>
 </url>
 <url>
@@ -37,14 +43,17 @@
   <loc>http://sfbitebite.com/the-house/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/sightglass/</loc>
+  <loc>http://sfbitebite.com/page/2/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/piccino/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/feed/</loc>
-  <lastmod>2013-02-13T18:20:20+00:00</lastmod>
+  <lastmod>2013-02-14T23:41:54+00:00</lastmod>
+</url>
+<url>
+  <loc>http://sfbitebite.com/bouchon/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=bouchon</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/tcho/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=tcho</loc>
@@ -59,6 +68,6 @@
   <loc>http://sfbitebite.com/il-cane-rosso/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=il-cane-rosso</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/blue-bottle-coffee/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=blue-bottle-coffee</loc>
+  <loc>http://sfbitebite.com/sightglass/</loc>
 </url>
 </urlset>
