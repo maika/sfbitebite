@@ -19,6 +19,9 @@
   <loc>http://sfbitebite.com/bi-rite-creamery/</loc>
 </url>
 <url>
+  <loc>http://sfbitebite.com/dantdelion-chocolate/</loc>
+</url>
+<url>
   <loc>http://sfbitebite.com/hog-island-oyster/</loc>
 </url>
 <url>
@@ -37,20 +40,17 @@
   <loc>http://sfbitebite.com/il-cane-rosso/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/chromatic/</loc>
-</url>
-<url>
-  <loc>http://sfbitebite.com/the-house/</loc>
-</url>
-<url>
   <loc>http://sfbitebite.com/page/2/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/piccino/</loc>
+  <loc>http://sfbitebite.com/feed/</loc>
+  <lastmod>2013-02-19T06:02:19+00:00</lastmod>
 </url>
 <url>
-  <loc>http://sfbitebite.com/feed/</loc>
-  <lastmod>2013-02-14T23:41:54+00:00</lastmod>
+  <loc>http://sfbitebite.com/dantdelion-chocolate/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=dantdelion-chocolate</loc>
+</url>
+<url>
+  <loc>http://sfbitebite.com/hog-island-oyster/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=hog-island-oyster</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/bouchon/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=bouchon</loc>
@@ -62,10 +62,13 @@
   <loc>http://sfbitebite.com/bi-rite-market/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=bi-rite-market</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/%E3%82%AB%E3%83%AA%E3%83%95%E3%82%A9%E3%83%AB%E3%83%8B%E3%82%A2%E5%B7%9E%E3%81%AE%E6%B6%88%E8%B2%BB%E7%A8%8E%E3%81%A8%E4%BD%BF%E7%94%A8%E7%A8%8E/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=%25e3%2582%25ab%25e3%2583%25aa%25e3%2583%2595%25e3%2582%25a9%25e3%2583%25ab%25e3%2583%258b%25e3%2582%25a2%25e5%25b7%259e%25e3%2581%25ae%25e6%25b6%2588%25e8%25b2%25bb%25e7%25a8%258e%25e3%2581%25a8%25e4%25bd%25bf%25e7%2594%25a8%25e7%25a8%258e</loc>
+  <loc>http://sfbitebite.com/the-house/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/il-cane-rosso/?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=il-cane-rosso</loc>
+  <loc>http://sfbitebite.com/piccino/</loc>
+</url>
+<url>
+  <loc>http://sfbitebite.com/chromatic/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/sightglass/</loc>
