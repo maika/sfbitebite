@@ -10,7 +10,14 @@
 <?php wp_head(); ?>
 </head>
 
-<body <?php body_class() ?>>
+<body <?php body_class() ?>><div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=219895948150079";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 	<div id="wrapper">
 		<header id="header">
 			<<?php pinboard_title_tag( 'site' ); ?> id="site-title">

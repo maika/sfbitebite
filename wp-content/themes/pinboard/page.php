@@ -20,7 +20,7 @@
 						</div><!-- .entry-content -->
 						<?php wp_link_pages( array( 'before' => '<footer class="entry-utility"><p class="post-pagination">' . __( 'Pages:', 'pinboard' ), 'after' => '</p></footer><!-- .entry-utility -->' ) ); ?>
 					</div><!-- .entry -->
-					<?php comments_template(); ?>
+					<div class="fb-comments" data-href="<?php the_permalink(); ?>" data-width="550" data-num-posts="3"></div>
 				</article><!-- .post -->
 			<?php else : ?>
 				<?php pinboard_404(); ?>
