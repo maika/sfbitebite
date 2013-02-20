@@ -18,7 +18,8 @@ if ( empty($thumbnails_default) )
 
 $dimensions = $this->thumbnail_dimensions();
 
-$output .= '<h3>' . $thumbnails_heading . '</h3>' . "\n";
+//$output .= '<h3>' . $thumbnails_heading . '</h3>' . "\n";
+$output .= '<h3>' . <span style="color: #888888;">$thumbnails_heading</span> . '</h3>' . "\n";
 
 if (have_posts()) {
 	$output .= '<div class="yarpp-thumbnails-horizontal">' . "\n";
