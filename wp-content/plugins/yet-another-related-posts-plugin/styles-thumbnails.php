@@ -5,7 +5,7 @@
  */
 
 $height = 120;
-$width = 90;
+$width = 120;
 
 if ( isset($_GET['height']) )
 	$height = (int) $_GET['height'];
