@@ -22,6 +22,12 @@
   <loc>http://sfbitebite.com/bi-rite-creamery/</loc>
 </url>
 <url>
+  <loc>http://sfbitebite.com/ici/</loc>
+</url>
+<url>
+  <loc>http://sfbitebite.com/sightglass/</loc>
+</url>
+<url>
   <loc>http://sfbitebite.com/the-mill/</loc>
 </url>
 <url>
@@ -44,12 +50,6 @@
 </url>
 <url>
   <loc>http://sfbitebite.com/sow/</loc>
-</url>
-<url>
-  <loc>http://sfbitebite.com/slow-club/</loc>
-</url>
-<url>
-  <loc>http://sfbitebite.com/range/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/page/2/</loc>
@@ -76,7 +76,7 @@
   <loc>http://sfbitebite.com/four-barrel-coffee/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/apps-to-travel-us/</loc>
+  <loc>http://sfbitebite.com/dandelion-chocolate/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/the-french-laundry/</loc>
@@ -127,9 +127,6 @@
   <loc>http://sfbitebite.com/blue-bottle-cafe/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/dandelion-chocolate/</loc>
-</url>
-<url>
   <loc>http://sfbitebite.com/tartine-bakery/</loc>
 </url>
 <url>
@@ -139,7 +136,10 @@
   <loc>http://sfbitebite.com/craftsman-wolves/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/sightglass/</loc>
+  <loc>http://sfbitebite.com/slow-club/</loc>
+</url>
+<url>
+  <loc>http://sfbitebite.com/range/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/ferry-building/</loc>
@@ -160,12 +160,6 @@
   <loc>http://sfbitebite.com/cowgirl-creamery/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/the-melt/</loc>
-</url>
-<url>
-  <loc>http://sfbitebite.com/five-guys/</loc>
-</url>
-<url>
   <loc>http://sfbitebite.com/philz-coffee/</loc>
 </url>
 <url>
@@ -181,7 +175,10 @@
   <loc>http://sfbitebite.com/miette/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/tcho/</loc>
+  <loc>http://sfbitebite.com/the-melt/</loc>
+</url>
+<url>
+  <loc>http://sfbitebite.com/five-guys/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/in-n-out-burger/</loc>
@@ -197,6 +194,9 @@
 </url>
 <url>
   <loc>http://sfbitebite.com/free-lunch-at-san-francisco-startups/</loc>
+</url>
+<url>
+  <loc>http://sfbitebite.com/apps-to-travel-us/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/sf-demographic-profile-data/</loc>
@@ -229,10 +229,7 @@
   <loc>http://sfbitebite.com/society-cafe/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/mamas/</loc>
-</url>
-<url>
-  <loc>http://sfbitebite.com/coco500/</loc>
+  <loc>http://sfbitebite.com/tcho/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/page/3/</loc>
@@ -242,6 +239,9 @@
 </url>
 <url>
   <loc>http://sfbitebite.com/il-cane-rosso/</loc>
+</url>
+<url>
+  <loc>http://sfbitebite.com/mamas/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/mission-cheese/</loc>
@@ -260,6 +260,9 @@
 </url>
 <url>
   <loc>http://sfbitebite.com/himawari/</loc>
+</url>
+<url>
+  <loc>http://sfbitebite.com/coco500/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/locanda/</loc>
