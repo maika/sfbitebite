@@ -3,4 +3,11 @@ web1: #component type & number
   shared_writable_dirs:
     - wp-content/uploads
   php_extensions:
+    - mysql
     - gd
+    - mbstring
+    - exif
+    - iconv
+    - mcrypt
+    - zip
+    - curl
