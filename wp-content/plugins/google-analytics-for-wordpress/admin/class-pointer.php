@@ -34,19 +34,19 @@ class GA_Pointer {
 	 */
 	function tracking_request() {
 		$id      = '#wpadminbar';
-		$content = '<h3>' . __( 'Help improve Google Analytics for WordPress', 'gawp' ) . '</h3>';
-		$content .= '<p>' . __( 'You\'ve just installed Google Analytics for WordPress by Yoast. Please helps us improve it by allowing us to gather anonymous usage stats so we know which configurations, plugins and themes to test with.', 'gawp' ) . '</p>';
+		$content = '<h3>' . __( 'Help improve Google Analytics for WordPress', 'google-analytics-for-wordpress' ) . '</h3>';
+		$content .= '<p>' . __( 'You\'ve just installed Google Analytics for WordPress by Yoast. Please helps us improve it by allowing us to gather anonymous usage stats so we know which configurations, plugins and themes to test with.', 'google-analytics-for-wordpress' ) . '</p>';
 		$opt_arr = array(
 			'content'  => $content,
 			'position' => array( 'edge' => 'top', 'align' => 'center' )
 		);
-		$button2 = __( 'Allow tracking', 'gawp' );
-		$nonce   = wp_create_nonce( 'wpga_activate_presstrends' );
+		$button2 = __( 'Allow tracking', 'google-analytics-for-wordpress' );
+		$nonce   = wp_create_nonce( 'wpga_activate_tracking' );
 
-		$function2 = 'document.location="' . admin_url( 'options-general.php?page=google-analytics-for-wordpress&allow_tracking=yes&nonce=' . $nonce ) . '";';
-		$function1 = 'document.location="' . admin_url( 'options-general.php?page=google-analytics-for-wordpress&allow_tracking=no&nonce=' . $nonce ) . '";';
+		$function2 = 'wpga_store_answer("yes","'.$nonce.'");';
+		$function1 = 'wpga_store_answer("no","'.$nonce.'");';
 
-		$this->print_scripts( $id, $opt_arr, __( 'Do not allow tracking', 'gawp' ), $button2, $function2, $function1 );
+		$this->print_scripts( $id, $opt_arr, __( 'Do not allow tracking', 'google-analytics-for-wordpress' ), $button2, $function2, $function1 );
 	}
 
 	/**
@@ -76,7 +76,18 @@ class GA_Pointer {
 		?>
 	<script type="text/javascript">
 		//<![CDATA[
-		(function ($) {
+        function wpga_store_answer( input, nonce ) {
+            var wpga_tracking_data = {
+                action : 'wpga_tracking_data',
+                allow_tracking : input,
+                nonce: nonce
+            }
+            jQuery.post( ajaxurl, wpga_tracking_data, function( response ) {
+                jQuery('#wp-pointer-0').remove();
+            } );
+        }
+
+        (function ($) {
 			var gawp_pointer_options = <?php echo json_encode( $options ); ?>, setup;
 
 			gawp_pointer_options = $.extend(gawp_pointer_options, {
@@ -99,11 +110,7 @@ class GA_Pointer {
 						<?php echo $button2_function; ?>
 					});
 					jQuery('#pointer-close').click(function () {
-						<?php if ( $button1_function == '' ) { ?>
-							wpseo_setIgnore("tour", "wp-pointer-0", "<?php echo wp_create_nonce( 'wpseo-ignore' ); ?>");
-							<?php } else { ?>
 							<?php echo $button1_function; ?>
-							<?php } ?>
 					});
 					<?php } ?>
 			};
