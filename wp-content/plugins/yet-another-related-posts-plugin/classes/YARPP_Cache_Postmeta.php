@@ -1,10 +1,5 @@
 <?php
 
-$yarpp_storage_class = 'YARPP_Cache_Postmeta';
-
-define('YARPP_POSTMETA_KEYWORDS_KEY','_yarpp_keywords');
-define('YARPP_POSTMETA_RELATED_KEY', '_yarpp_related');
-
 class YARPP_Cache_Postmeta extends YARPP_Cache {
 
 	public $name = "postmeta";
@@ -69,9 +64,8 @@ class YARPP_Cache_Postmeta extends YARPP_Cache {
 		$arg = preg_replace("!{$wpdb->posts}.ID = \d+!","{$wpdb->posts}.ID in (".join(',',$this->related_IDs).")",$arg);
 
 		// if recent is set, add an additional condition
-		$recent = yarpp_get_option('recent');
-		if ( !!$recent )
-			$arg .= " and post_date > date_sub(now(), interval {$recent}) ";
+		$recent = $this->core->get_option('recent');
+		if ((bool) $recent) $arg .= " and post_date > date_sub(now(), interval {$recent}) ";
 		return $arg;
 	}
 

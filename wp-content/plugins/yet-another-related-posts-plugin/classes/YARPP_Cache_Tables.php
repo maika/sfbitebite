@@ -1,9 +1,5 @@
 <?php
 
-$yarpp_storage_class = 'YARPP_Cache_Tables';
-
-define('YARPP_TABLES_RELATED_TABLE', 'yarpp_related_cache');
-
 class YARPP_Cache_Tables extends YARPP_Cache {
 	public $name = "custom tables";
 
@@ -28,19 +24,20 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		global $wpdb;
 
 		$charset_collate = '';
-		if ( ! empty( $wpdb->charset ) )
-			$charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
-		if ( ! empty( $wpdb->collate ) )
-			$charset_collate .= " COLLATE $wpdb->collate";
+		if (!empty($wpdb->charset)) $charset_collate = "DEFAULT CHARACTER SET ".$wpdb->charset;
+		if (!empty($wpdb->collate)) $charset_collate .= " COLLATE ".$wpdb->collate;
 
-		$wpdb->query("CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}" . YARPP_TABLES_RELATED_TABLE . "` (
-			`reference_ID` bigint(20) unsigned NOT NULL default '0',
-			`ID` bigint(20) unsigned NOT NULL default '0',
-			`score` float unsigned NOT NULL default '0',
-			`date` timestamp NOT NULL default CURRENT_TIMESTAMP,
-			PRIMARY KEY ( `reference_ID` , `ID` ),
-			INDEX (`score`), INDEX (`ID`)
-			) $charset_collate;");
+		$wpdb->query(
+            "CREATE TABLE IF NOT EXISTS `".$wpdb->prefix.YARPP_TABLES_RELATED_TABLE."` (
+			    `reference_ID`  bigint(20) unsigned NOT NULL default '0',
+			    `ID`            bigint(20) unsigned NOT NULL default '0',
+			    `score`         float unsigned NOT NULL default '0',
+			    `date`          timestamp NOT NULL default CURRENT_TIMESTAMP,
+			PRIMARY KEY (`reference_ID`,`ID`),
+			INDEX (`score`),
+			INDEX (`ID`)
+			)$charset_collate;"
+        );
 	}
 	
 	public function upgrade($last_version) {
@@ -92,6 +89,19 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 		global $wpdb;
 		return wp_list_pluck($wpdb->get_results("select num, count(*) as ct from (select 0 + if(id = 0, 0, count(ID)) as num from {$wpdb->prefix}yarpp_related_cache group by reference_ID) as t group by num order by num asc", OBJECT_K), 'ct');
 	}
+	
+	public function graph_data( $threshold = 5 ) {
+		global $wpdb;
+		
+		$threshold = absint($threshold);
+		$results = $wpdb->get_results("select pair, sum(score) as score from 
+			((select concat(reference_ID, '-', ID) as pair, score from {$wpdb->prefix}yarpp_related_cache where reference_ID < ID)
+			union
+			(select concat(ID, '-', reference_ID) as pair, score from {$wpdb->prefix}yarpp_related_cache where ID < reference_ID)) as t
+			group by pair
+			having sum(score) > {$threshold}");
+		return $results;
+	}
 
 	/**
 	 * MAGIC FILTERS
@@ -105,14 +115,13 @@ class YARPP_Cache_Tables extends YARPP_Cache {
 
 	public function where_filter($arg) {
 		global $wpdb;
-		$threshold = yarpp_get_option('threshold');
+		$threshold = $this->core->get_option('threshold');
 		if ($this->yarpp_time) {
 
 			$arg = str_replace("$wpdb->posts.ID = ","yarpp.score >= $threshold and yarpp.reference_ID = ",$arg);
 
-			$recent = yarpp_get_option('recent');
-			if ( !!$recent )
-				$arg .= " and post_date > date_sub(now(), interval {$recent}) ";
+			$recent = $this->core->get_option('recent');
+			if ((bool) $recent) $arg .= " and post_date > date_sub(now(), interval {$recent}) ";
 		}
 		return $arg;
 	}
