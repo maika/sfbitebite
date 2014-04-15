@@ -359,18 +359,25 @@ em {
 	font-style:italic;
 }
 
+/*Added for cleaner google ads inserts*/
 ins {
+	background: transparent;
+}
+
+/*Original ins makes for yellow backgrounds with adsense*/
+
+/*ins {
 	padding:1px 4px;
-	background:#FF0;
-	background:-moz-linear-gradient(#FF3, #EE0);
-	background:-webkit-linear-gradient(#FF3, #EE0);
-	background:-o-linear-gradient(#FF3, #EE0);
-	background:-ms-linear-gradient(#FF3, #EE0);
-	background:linear-gradient(#FF3, #EE0);
+	background:#FFF;
+	background:-moz-linear-gradient(#FFF, #EE0);
+	background:-webkit-linear-gradient(#FFF, #EE0);
+	background:-o-linear-gradient(#FFF, #EE0);
+	background:-ms-linear-gradient(#FFF, #EE0);
+	background:linear-gradient(#FFF, #EE0);
 	border-radius:4px;
 	box-shadow:0 1px 1px rgba(0, 0, 0, .2);
 	text-decoration:none;
-}
+}*/
 
 pre {
 	padding:15px;
