@@ -28,6 +28,9 @@
   <loc>http://sfbitebite.com/dandelion-chocolate/</loc>
 </url>
 <url>
+  <loc>http://sfbitebite.com/super-duper-burgers/</loc>
+</url>
+<url>
   <loc>http://sfbitebite.com/sf-restaurant-spinoff/</loc>
 </url>
 <url>
@@ -52,16 +55,13 @@
   <loc>http://sfbitebite.com/ad-hoc/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/nopa/</loc>
-</url>
-<url>
   <loc>http://sfbitebite.com/page/2/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/%e3%82%ab%e3%83%aa%e3%83%95%e3%82%a9%e3%83%ab%e3%83%8b%e3%82%a2%e5%b7%9e%e3%81%ae%e6%b6%88%e8%b2%bb%e7%a8%8e%e3%81%a8%e4%bd%bf%e7%94%a8%e7%a8%8e/</loc>
+  <loc>http://sfbitebite.com/napa-sonoma-wine/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/napa-sonoma-wine/</loc>
+  <loc>http://sfbitebite.com/%e3%82%ab%e3%83%aa%e3%83%95%e3%82%a9%e3%83%ab%e3%83%8b%e3%82%a2%e5%b7%9e%e3%81%ae%e6%b6%88%e8%b2%bb%e7%a8%8e%e3%81%a8%e4%bd%bf%e7%94%a8%e7%a8%8e/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/2013-san-francisco-best-restaurant-by77/</loc>
@@ -70,10 +70,10 @@
   <loc>http://sfbitebite.com/crustacean/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/the-french-laundry/</loc>
+  <loc>http://sfbitebite.com/blue-bottle-cafe/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/blue-bottle-cafe/</loc>
+  <loc>http://sfbitebite.com/the-french-laundry/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/heath-ceramics-factory-store/</loc>
@@ -116,6 +116,9 @@
 </url>
 <url>
   <loc>http://sfbitebite.com/aq/</loc>
+</url>
+<url>
+  <loc>http://sfbitebite.com/nopa/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/piccino/</loc>
@@ -289,22 +292,40 @@
   <loc>http://sfbitebite.com/heath-ceramics/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/beretta/</loc>
+  <loc>http://sfbitebite.com/ramen-dojo/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/himawari/</loc>
-</url>
-<url>
-  <loc>http://sfbitebite.com/park-tavern/</loc>
+  <loc>http://sfbitebite.com/orenchi-ramen/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/range/</loc>
 </url>
 <url>
+  <loc>http://sfbitebite.com/the-house/</loc>
+</url>
+<url>
+  <loc>http://sfbitebite.com/mamas/</loc>
+</url>
+<url>
+  <loc>http://sfbitebite.com/coco500/</loc>
+</url>
+<url>
   <loc>http://sfbitebite.com/chromatic/</loc>
 </url>
 <url>
+  <loc>http://sfbitebite.com/beretta/</loc>
+</url>
+<url>
+  <loc>http://sfbitebite.com/ozumo/</loc>
+</url>
+<url>
   <loc>http://sfbitebite.com/mission-cheese/</loc>
+</url>
+<url>
+  <loc>http://sfbitebite.com/foreign-cinema/</loc>
+</url>
+<url>
+  <loc>http://sfbitebite.com/slow-club/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/prospect/</loc>
@@ -313,16 +334,10 @@
   <loc>http://sfbitebite.com/marlowe/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/bi-rite-market/</loc>
-</url>
-<url>
   <loc>http://sfbitebite.com/page/3/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/the-cheese-school/</loc>
-</url>
-<url>
-  <loc>http://sfbitebite.com/foreign-cinema/</loc>
+  <loc>http://sfbitebite.com/bi-rite-market/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/suppenkuche/</loc>
@@ -331,25 +346,16 @@
   <loc>http://sfbitebite.com/namu-gaji/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/mamas/</loc>
-</url>
-<url>
-  <loc>http://sfbitebite.com/orenchi-ramen/</loc>
-</url>
-<url>
-  <loc>http://sfbitebite.com/il-cane-rosso/</loc>
-</url>
-<url>
-  <loc>http://sfbitebite.com/slow-club/</loc>
-</url>
-<url>
-  <loc>http://sfbitebite.com/ramen-dojo/</loc>
-</url>
-<url>
   <loc>http://sfbitebite.com/tcho/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/locanda/</loc>
+</url>
+<url>
+  <loc>http://sfbitebite.com/the-cheese-school/</loc>
+</url>
+<url>
+  <loc>http://sfbitebite.com/il-cane-rosso/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/nombe/</loc>
@@ -358,13 +364,16 @@
   <loc>http://sfbitebite.com/ramen-shop/</loc>
 </url>
 <url>
+  <loc>http://sfbitebite.com/himawari/</loc>
+</url>
+<url>
   <loc>http://sfbitebite.com/the-house2/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/page/4/</loc>
+  <loc>http://sfbitebite.com/park-tavern/</loc>
 </url>
 <url>
-  <loc>http://sfbitebite.com/the-house/</loc>
+  <loc>http://sfbitebite.com/page/4/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/page/5/</loc>
@@ -374,12 +383,6 @@
 </url>
 <url>
   <loc>http://sfbitebite.com/page/6/</loc>
-</url>
-<url>
-  <loc>http://sfbitebite.com/coco500/</loc>
-</url>
-<url>
-  <loc>http://sfbitebite.com/ozumo/</loc>
 </url>
 <url>
   <loc>http://sfbitebite.com/page/7/</loc>
