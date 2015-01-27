@@ -33,6 +33,12 @@ if (isset($_SERVER['PLATFORM']) && $_SERVER['PLATFORM'] == 'PAGODABOX') {
     define('DB_PASSWORD', $_SERVER['DB1_PASS']);
     define ('DB_HOST', $_SERVER['DB1_HOST'] . ':' . $_SERVER['DB1_PORT']);
 }
+elseif (isset($_SERVER['PLATFORM']) && $_SERVER['PLATFORM'] == 'PAGODABOXV2') {
+    define('DB_NAME', $_SERVER['DATABASE1_NAME']);
+    define('DB_USER', $_SERVER['DATABASE1_USER']);
+    define('DB_PASSWORD', $_SERVER['DATABASE1_PASS']);
+    define ('DB_HOST', $_SERVER['DATABASE1_HOST'] . ':' . $_SERVER['DATABASE1_PORT']);
+}
 else {
     define('DB_NAME', 'wordpress');
     define('DB_USER', 'root');
