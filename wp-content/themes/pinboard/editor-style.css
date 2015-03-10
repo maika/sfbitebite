@@ -6,6 +6,7 @@ Description: Used to style the TinyMCE editor.
 
 html .mceContentBody {
 	max-width: 660px;
+	margin: 20px;
 }
 
 html, body, div, span, applet, object, iframe,

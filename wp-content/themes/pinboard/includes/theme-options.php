@@ -16,10 +16,12 @@ function pinboard_admin_scripts( $page_hook ) {
 	if( 'appearance_page_pinboard_options' == $page_hook ) {
 		wp_enqueue_style( 'pinboard_admin_style', get_template_directory_uri() . '/styles/admin.css' );
 		wp_enqueue_style( 'farbtastic' );
+		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'jquery-ui-core' );
 		wp_enqueue_script( 'jquery-ui-draggable' );
 		wp_enqueue_script( 'json2' );
 		wp_enqueue_script( 'farbtastic' );
+		wp_enqueue_script( 'wp-color-picker' );
 	}
 }
 
@@ -35,9 +37,14 @@ function pinboard_admin_options_page() { ?>
 			<?php settings_fields( 'pinboard_theme_options' ); ?>
 			<?php do_settings_sections('pinboard_options'); ?>
 			<p>&nbsp;</p>
-			<?php $tab = ( isset( $_GET['tab'] ) ? $_GET['tab'] : 'general' ); ?>
+			<?php $tab = ( isset( $_GET['tab'] ) ? esc_attr( $_GET['tab'] ) : 'general' ); ?>
 			<input name="pinboard_theme_options[submit-<?php echo $tab; ?>]" type="submit" class="button-primary" value="<?php _e( 'Save Settings', 'pinboard' ); ?>" />
 			<input name="pinboard_theme_options[reset-<?php echo $tab; ?>]" type="submit" class="button-secondary" value="<?php _e( 'Reset Defaults', 'pinboard' ); ?>" />
+			<script>
+				jQuery(document).ready(function($) {
+					$('.wp-color-picker').wpColorPicker();
+				});
+			</script>
 		</form>
 	</div>
 <?php
@@ -101,7 +108,7 @@ function pinboard_general_settings_sections() {
 function pinboard_global_options() {
 	add_settings_field( 'pinboard_retina_header', __( 'Retina Header Image', 'pinboard' ), 'pinboard_retina_header', 'pinboard_options', 'pinboard_global_options' );
 	add_settings_field( 'pinboard_fancy_dropdowns', __( 'Fancy Drop-down Menus', 'pinboard' ), 'pinboard_fancy_dropdowns', 'pinboard_options', 'pinboard_global_options' );
-	add_settings_field( 'pinboard_crop_thumbnails', __( 'Lightbox', 'pinboard' ), 'pinboard_crop_thumbnails', 'pinboard_options', 'pinboard_global_options' );
+	add_settings_field( 'pinboard_crop_thumbnails', __( 'Post Thumbnails', 'pinboard' ), 'pinboard_crop_thumbnails', 'pinboard_options', 'pinboard_global_options' );
 	add_settings_field( 'pinboard_use_lightbox', __( 'Lightbox', 'pinboard' ), 'pinboard_use_lightbox', 'pinboard_options', 'pinboard_global_options' );
 	add_settings_field( 'pinboard_posts_nav', __( 'Posts Navigation', 'pinboard' ), 'pinboard_posts_nav', 'pinboard_options', 'pinboard_global_options' );
 	add_settings_field( 'pinboard_posts_nav_labels', __( 'Posts Navigation Labels', 'pinboard' ), 'pinboard_posts_nav_labels', 'pinboard_options', 'pinboard_global_options' );
@@ -369,7 +376,7 @@ function pinboard_design_settings_sections() {
 function pinboard_backgrounds() {
 	add_settings_field( 'pinboard_page_background', __( 'Page Background Color', 'pinboard' ), 'pinboard_page_background', 'pinboard_options', 'pinboard_backgrounds' );
 	add_settings_field( 'pinboard_menu_background', __( 'Menu Background Color', 'pinboard' ), 'pinboard_menu_background', 'pinboard_options', 'pinboard_backgrounds' );
-	add_settings_field( 'pinboard_menu_item_hover_background', __( 'Menu Item Hover Background Color', 'pinboard' ), 'pinboard_menu_item_hover_background', 'pinboard_options', 'pinboard_backgrounds' );
+	add_settings_field( 'pinboard_submenu_background', __( 'Dropdown Menus Background Color', 'pinboard' ), 'pinboard_submenu_background', 'pinboard_options', 'pinboard_backgrounds' );
 	add_settings_field( 'pinboard_sidebar_wide_background', __( 'Site Location Background Color', 'pinboard' ), 'pinboard_sidebar_wide_background', 'pinboard_options', 'pinboard_backgrounds' );
 	add_settings_field( 'pinboard_content_background', __( 'Content Background Color', 'pinboard' ), 'pinboard_content_background', 'pinboard_options', 'pinboard_backgrounds' );
 	add_settings_field( 'pinboard_post_meta_background', __( 'Post Meta Background Color', 'pinboard' ), 'pinboard_post_meta_background', 'pinboard_options', 'pinboard_backgrounds' );
@@ -378,203 +385,43 @@ function pinboard_backgrounds() {
 }
 
 function pinboard_page_background() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[page_background]" type="text" id="page_background" value="<?php echo esc_attr( pinboard_get_option( 'page_background' ) ); ?>" />
-		<div id="color_picker_page_background" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function pagebgpickerUpdate(color) {
-			jQuery('#page_background').css("background-color", color);
-			jQuery('#page_background').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#page_background').focus(function() {
-				$('#color_picker_page_background').show();
-			});
-			$('#page_background').blur(function() {
-				$('#color_picker_page_background').hide();
-			});
-			var page_background = $.farbtastic('#color_picker_page_background', pagebgpickerUpdate);	
-			page_background.setColor('<?php echo pinboard_get_option( 'page_background' ); ?>');
-			page_background.linkTo(pagebgpickerUpdate);
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[page_background]" type="text" id="page_background" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'page_background' ) ); ?>" />
+	<?php
 }
 
 function pinboard_menu_background() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[menu_background]" type="text" id="menu_background" value="<?php echo esc_attr( pinboard_get_option( 'menu_background' ) ); ?>" style="color:#fff" />
-		<div id="color_picker_menu_background" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function menubgpickerUpdate(color) {
-			jQuery('#menu_background').css("background-color", color);
-			jQuery('#menu_background').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#menu_background').focus(function() {
-				$('#color_picker_menu_background').show();
-			});
-			$('#menu_background').blur(function() {
-				$('#color_picker_menu_background').hide();
-			});
-			var menu_background = $.farbtastic('#color_picker_menu_background', menubgpickerUpdate);	
-			menu_background.setColor('<?php echo pinboard_get_option( 'menu_background' ); ?>');
-			menu_background.linkTo(menubgpickerUpdate);
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[menu_background]" type="text" id="menu_background" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'menu_background' ) ); ?>" />
+	<?php
 }
 
-function pinboard_menu_item_hover_background() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[menu_item_hover_background]" type="text" id="menu_item_hover_background" value="<?php echo esc_attr( pinboard_get_option( 'menu_item_hover_background' ) ); ?>" style="color:#fff" />
-		<div id="color_picker_menu_item_hover_background" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function menuibgpickerUpdate(color) {
-			jQuery('#menu_item_hover_background').css("background-color", color);
-			jQuery('#menu_item_hover_background').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#menu_item_hover_background').focus(function() {
-				$('#color_picker_menu_item_hover_background').show();
-			});
-			$('#menu_item_hover_background').blur(function() {
-				$('#color_picker_menu_item_hover_background').hide();
-			});
-			var menu_item_hover_background = $.farbtastic('#color_picker_menu_item_hover_background', menuibgpickerUpdate);	
-			menu_item_hover_background.setColor('<?php echo pinboard_get_option( 'menu_item_hover_background' ); ?>');
-			menu_item_hover_background.linkTo(menuibgpickerUpdate);
-		});
-	</script>
-<?php
+function pinboard_submenu_background() { ?>
+	<input name="pinboard_theme_options[submenu_background]" type="text" id="submenu_background" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'submenu_background' ) ); ?>" />
+	<?php
 }
 
 function pinboard_sidebar_wide_background() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[sidebar_wide_background]" type="text" id="sidebar_wide_background" value="<?php echo esc_attr( pinboard_get_option( 'sidebar_wide_background' ) ); ?>" />
-		<div id="color_picker_sidebar_wide_background" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function sidebarwbgpickerUpdate(color) {
-			jQuery('#sidebar_wide_background').css("background-color", color);
-			jQuery('#sidebar_wide_background').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#sidebar_wide_background').focus(function() {
-				$('#color_picker_sidebar_wide_background').show();
-			});
-			$('#sidebar_wide_background').blur(function() {
-				$('#color_picker_sidebar_wide_background').hide();
-			});
-			var sidebar_wide_background = $.farbtastic('#color_picker_sidebar_wide_background', sidebarwbgpickerUpdate);	
-			sidebar_wide_background.setColor('<?php echo pinboard_get_option( 'sidebar_wide_background' ); ?>');
-			sidebar_wide_background.linkTo(sidebarwbgpickerUpdate);
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[sidebar_wide_background]" type="text" id="sidebar_wide_background" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'sidebar_wide_background' ) ); ?>" />
+	<?php
 }
 
 function pinboard_content_background() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[content_background]" type="text" id="content_background" value="<?php echo esc_attr( pinboard_get_option( 'content_background' ) ); ?>" />
-		<div id="color_picker_content_background" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function contentbgpickerUpdate(color) {
-			jQuery('#content_background').css("background-color", color);
-			jQuery('#content_background').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#content_background').focus(function() {
-				$('#color_picker_content_background').show();
-			});
-			$('#content_background').blur(function() {
-				$('#color_picker_content_background').hide();
-			});
-			var content_background = $.farbtastic('#color_picker_content_background', contentbgpickerUpdate);	
-			content_background.setColor('<?php echo pinboard_get_option( 'content_background' ); ?>');
-			content_background.linkTo(contentbgpickerUpdate);
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[content_background]" type="text" id="content_background" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'content_background' ) ); ?>" />
+	<?php
 }
 
 function pinboard_post_meta_background() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[post_meta_background]" type="text" id="post_meta_background" value="<?php echo esc_attr( pinboard_get_option( 'post_meta_background' ) ); ?>" />
-		<div id="color_picker_post_meta_background" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function metabgpickerUpdate(color) {
-			jQuery('#post_meta_background').css("background-color", color);
-			jQuery('#post_meta_background').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#post_meta_background').focus(function() {
-				$('#color_picker_post_meta_background').show();
-			});
-			$('#post_meta_background').blur(function() {
-				$('#color_picker_post_meta_background').hide();
-			});
-			var post_meta_background = $.farbtastic('#color_picker_post_meta_background', metabgpickerUpdate);	
-			post_meta_background.setColor('<?php echo pinboard_get_option( 'post_meta_background' ); ?>');
-			post_meta_background.linkTo(metabgpickerUpdate);
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[post_meta_background]" type="text" id="post_meta_background" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'post_meta_background' ) ); ?>" />
+	<?php
 }
 
 function pinboard_footer_area_background() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[footer_area_background]" type="text" id="footer_area_background" value="<?php echo esc_attr( pinboard_get_option( 'footer_area_background' ) ); ?>" style="color:#fff" />
-		<div id="color_picker_footer_area_background" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function footerabgpickerUpdate(color) {
-			jQuery('#footer_area_background').css("background-color", color);
-			jQuery('#footer_area_background').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#footer_area_background').focus(function() {
-				$('#color_picker_footer_area_background').show();
-			});
-			$('#footer_area_background').blur(function() {
-				$('#color_picker_footer_area_background').hide();
-			});
-			var footer_area_background = $.farbtastic('#color_picker_footer_area_background', footerabgpickerUpdate);	
-			footer_area_background.setColor('<?php echo pinboard_get_option( 'footer_area_background' ); ?>');
-			footer_area_background.linkTo(footerabgpickerUpdate);
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[footer_area_background]" type="text" id="footer_area_background" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'footer_area_background' ) ); ?>" />
+	<?php
 }
 
 function pinboard_footer_background() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[footer_background]" type="text" id="footer_background" value="<?php echo esc_attr( pinboard_get_option( 'footer_background' ) ); ?>" style="color:#fff" />
-		<div id="color_picker_footer_background" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function footerbgpickerUpdate(color) {
-			jQuery('#footer_background').css("background-color", color);
-			jQuery('#footer_background').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#footer_background').focus(function() {
-				$('#color_picker_footer_background').show();
-			});
-			$('#footer_background').blur(function() {
-				$('#color_picker_footer_background').hide();
-			});
-			var footer_background = $.farbtastic('#color_picker_footer_background', footerbgpickerUpdate);	
-			footer_background.setColor('<?php echo pinboard_get_option( 'footer_background' ); ?>');
-			footer_background.linkTo(footerbgpickerUpdate);
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[footer_background]" type="text" id="footer_background" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'footer_background' ) ); ?>" />
+	<?php
 }
 
 function pinboard_layout_settings_sections() {
@@ -899,353 +746,73 @@ function pinboard_colors() {
 }
 
 function pinboard_body_color() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[body_color]" type="text" id="body_color" value="<?php echo esc_attr( pinboard_get_option( 'body_color' ) ); ?>" style="color:#fff" />
-		<div id="color_picker_body_color" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function bodypickerUpdate(color) {
-			jQuery('#body_color').css("background-color", color);
-			jQuery('#body_color').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#body_color').focus(function() {
-				$('#color_picker_body_color').show();
-			});
-			$('#body_color').blur(function() {
-				$('#color_picker_body_color').hide();
-			});
-			var body_color = $.farbtastic('#color_picker_body_color', bodypickerUpdate);	
-			body_color.setColor('<?php echo pinboard_get_option( 'body_color' ); ?>');
-			body_color.linkTo(bodypickerUpdate);         
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[body_color]" type="text" id="body_color" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'body_color' ) ); ?>" />
+	<?php
 }
 
 function pinboard_headings_color() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[headings_color]" type="text" id="headings_color" value="<?php echo esc_attr( pinboard_get_option( 'headings_color' ) ); ?>" style="color:#fff" />
-		<div id="color_picker_headings_color" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function headingspickerUpdate(color) {
-			jQuery('#headings_color').css("background-color", color);
-			jQuery('#headings_color').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#headings_color').focus(function() {
-				$('#color_picker_headings_color').show();
-			});
-			$('#headings_color').blur(function() {
-				$('#color_picker_headings_color').hide();
-			});
-			var headings_color = $.farbtastic('#color_picker_headings_color', headingspickerUpdate);	
-			headings_color.setColor('<?php echo pinboard_get_option( 'headings_color' ); ?>');
-			headings_color.linkTo(headingspickerUpdate);         
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[headings_color]" type="text" id="headings_color" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'headings_color' ) ); ?>" />
+	<?php
 }
 
 function pinboard_content_color() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[content_color]" type="text" id="content_color" value="<?php echo esc_attr( pinboard_get_option( 'content_color' ) ); ?>" style="color:#fff" />
-		<div id="color_picker_content_color" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function contentpickerUpdate(color) {
-			jQuery('#content_color').css("background-color", color);
-			jQuery('#content_color').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#content_color').focus(function() {
-				$('#color_picker_content_color').show();
-			});
-			$('#content_color').blur(function() {
-				$('#color_picker_content_color').hide();
-			});
-			var content_color = $.farbtastic('#color_picker_content_color', contentpickerUpdate);	
-			content_color.setColor('<?php echo pinboard_get_option( 'content_color' ); ?>');
-			content_color.linkTo(contentpickerUpdate);         
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[content_color]" type="text" id="content_color" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'content_color' ) ); ?>" />
+	<?php
 }
 
 function pinboard_links_color() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[links_color]" type="text" id="links_color" value="<?php echo esc_attr( pinboard_get_option( 'links_color' ) ); ?>" style="color:#fff" />
-		<div id="color_picker_links_color" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function linkspickerUpdate(color) {
-			jQuery('#links_color').css("background-color", color);
-			jQuery('#links_color').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#links_color').focus(function() {
-				$('#color_picker_links_color').show();
-			});
-			$('#links_color').blur(function() {
-				$('#color_picker_links_color').hide();
-			});
-			var links_color = $.farbtastic('#color_picker_links_color', linkspickerUpdate);	
-			links_color.setColor('<?php echo pinboard_get_option( 'links_color' ); ?>');
-			links_color.linkTo(linkspickerUpdate);         
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[links_color]" type="text" id="links_color" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'links_color' ) ); ?>" />
+	<?php
 }
 
 function pinboard_links_hover_color() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[links_hover_color]" type="text" id="links_hover_color" value="<?php echo esc_attr( pinboard_get_option( 'links_hover_color' ) ); ?>" style="color:#fff" />
-		<div id="color_picker_links_hover_color" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function hoverpickerUpdate(color) {
-			jQuery('#links_hover_color').css("background-color", color);
-			jQuery('#links_hover_color').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#links_hover_color').focus(function() {
-				$('#color_picker_links_hover_color').show();
-			});
-			$('#links_hover_color').blur(function() {
-				$('#color_picker_links_hover_color').hide();
-			});
-			var links_hover_color = $.farbtastic('#color_picker_links_hover_color', hoverpickerUpdate);	
-			links_hover_color.setColor('<?php echo pinboard_get_option( 'links_hover_color' ); ?>');
-			links_hover_color.linkTo(hoverpickerUpdate);         
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[links_hover_color]" type="text" id="links_hover_color" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'links_hover_color' ) ); ?>" />
+	<?php
 }
 
 function pinboard_menu_color() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[menu_color]" type="text" id="menu_color" value="<?php echo esc_attr( pinboard_get_option( 'menu_color' ) ); ?>" />
-		<div id="color_picker_menu_color" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function menupickerUpdate(color) {
-			jQuery('#menu_color').css("background-color", color);
-			jQuery('#menu_color').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#menu_color').focus(function() {
-				$('#color_picker_menu_color').show();
-			});
-			$('#menu_color').blur(function() {
-				$('#color_picker_menu_color').hide();
-			});
-			var menu_color = $.farbtastic('#color_picker_menu_color', menupickerUpdate);	
-			menu_color.setColor('<?php echo pinboard_get_option( 'menu_color' ); ?>');
-			menu_color.linkTo(menupickerUpdate);         
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[menu_color]" type="text" id="menu_color" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'menu_color' ) ); ?>" />
+	<?php
 }
 
 function pinboard_menu_hover_color() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[menu_hover_color]" type="text" id="menu_hover_color" value="<?php echo esc_attr( pinboard_get_option( 'menu_hover_color' ) ); ?>" />
-		<div id="color_picker_menu_hover_color" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function menuhpickerUpdate(color) {
-			jQuery('#menu_hover_color').css("background-color", color);
-			jQuery('#menu_hover_color').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#menu_hover_color').focus(function() {
-				$('#color_picker_menu_hover_color').show();
-			});
-			$('#menu_hover_color').blur(function() {
-				$('#color_picker_menu_hover_color').hide();
-			});
-			var menu_hover_color = $.farbtastic('#color_picker_menu_hover_color', menuhpickerUpdate);	
-			menu_hover_color.setColor('<?php echo pinboard_get_option( 'menu_hover_color' ); ?>');
-			menu_hover_color.linkTo(menuhpickerUpdate);         
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[menu_hover_color]" type="text" id="menu_hover_color" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'menu_hover_color' ) ); ?>" />
+	<?php
 }
 
 function pinboard_sidebar_color() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[sidebar_color]" type="text" id="sidebar_color" value="<?php echo esc_attr( pinboard_get_option( 'sidebar_color' ) ); ?>" style="color:#fff" />
-		<div id="color_picker_sidebar_color" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function sidebarpickerUpdate(color) {
-			jQuery('#sidebar_color').css("background-color", color);
-			jQuery('#sidebar_color').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#sidebar_color').focus(function() {
-				$('#color_picker_sidebar_color').show();
-			});
-			$('#sidebar_color').blur(function() {
-				$('#color_picker_sidebar_color').hide();
-			});
-			var sidebar_color = $.farbtastic('#color_picker_sidebar_color', sidebarpickerUpdate);	
-			sidebar_color.setColor('<?php echo pinboard_get_option( 'sidebar_color' ); ?>');
-			sidebar_color.linkTo(sidebarpickerUpdate);         
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[sidebar_color]" type="text" id="sidebar_color" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'sidebar_color' ) ); ?>" />
+	<?php
 }
 
 function pinboard_sidebar_title_color() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[sidebar_title_color]" type="text" id="sidebar_title_color" value="<?php echo esc_attr( pinboard_get_option( 'sidebar_title_color' ) ); ?>" style="color:#fff" />
-		<div id="color_picker_sidebar_title_color" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function sidebartitlepickerUpdate(color) {
-			jQuery('#sidebar_title_color').css("background-color", color);
-			jQuery('#sidebar_title_color').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#sidebar_title_color').focus(function() {
-				$('#color_picker_sidebar_title_color').show();
-			});
-			$('#sidebar_title_color').blur(function() {
-				$('#color_picker_sidebar_title_color').hide();
-			});
-			var sidebar_title_color = $.farbtastic('#color_picker_sidebar_title_color', sidebartitlepickerUpdate);	
-			sidebar_title_color.setColor('<?php echo pinboard_get_option( 'sidebar_title_color' ); ?>');
-			sidebar_title_color.linkTo(sidebartitlepickerUpdate);         
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[sidebar_title_color]" type="text" id="sidebar_title_color" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'sidebar_title_color' ) ); ?>" />
+	<?php
 }
 
 function pinboard_sidebar_links_color() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[sidebar_links_color]" type="text" id="sidebar_links_color" value="<?php echo esc_attr( pinboard_get_option( 'sidebar_links_color' ) ); ?>" style="color:#fff" />
-		<div id="color_picker_sidebar_links_color" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function sidebar_linkspickerUpdate(color) {
-			jQuery('#sidebar_links_color').css("background-color", color);
-			jQuery('#sidebar_links_color').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#sidebar_links_color').focus(function() {
-				$('#color_picker_sidebar_links_color').show();
-			});
-			$('#sidebar_links_color').blur(function() {
-				$('#color_picker_sidebar_links_color').hide();
-			});
-			var sidebar_links_color = $.farbtastic('#color_picker_sidebar_links_color', sidebar_linkspickerUpdate);	
-			sidebar_links_color.setColor('<?php echo pinboard_get_option( 'sidebar_links_color' ); ?>');
-			sidebar_links_color.linkTo(sidebar_linkspickerUpdate);         
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[sidebar_links_color]" type="text" id="sidebar_links_color" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'sidebar_links_color' ) ); ?>" />
+	<?php
 }
 
 function pinboard_footer_color() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[footer_color]" type="text" id="footer_color" value="<?php echo esc_attr( pinboard_get_option( 'footer_color' ) ); ?>" />
-		<div id="color_picker_footer_color" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function footerpickerUpdate(color) {
-			jQuery('#footer_color').css("background-color", color);
-			jQuery('#footer_color').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#footer_color').focus(function() {
-				$('#color_picker_footer_color').show();
-			});
-			$('#footer_color').blur(function() {
-				$('#color_picker_footer_color').hide();
-			});
-			var footer_color = $.farbtastic('#color_picker_footer_color', footerpickerUpdate);	
-			footer_color.setColor('<?php echo pinboard_get_option( 'footer_color' ); ?>');
-			footer_color.linkTo(footerpickerUpdate);         
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[footer_color]" type="text" id="footer_color" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'footer_color' ) ); ?>" />
+	<?php
 }
 
 function pinboard_footer_title_color() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[footer_title_color]" type="text" id="footer_title_color" value="<?php echo esc_attr( pinboard_get_option( 'footer_title_color' ) ); ?>" />
-		<div id="color_picker_footer_title_color" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function footertitlepickerUpdate(color) {
-			jQuery('#footer_title_color').css("background-color", color);
-			jQuery('#footer_title_color').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#footer_title_color').focus(function() {
-				$('#color_picker_footer_title_color').show();
-			});
-			$('#footer_title_color').blur(function() {
-				$('#color_picker_footer_title_color').hide();
-			});
-			var footer_title_color = $.farbtastic('#color_picker_footer_title_color', footertitlepickerUpdate);	
-			footer_title_color.setColor('<?php echo pinboard_get_option( 'footer_title_color' ); ?>');
-			footer_title_color.linkTo(footertitlepickerUpdate);         
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[footer_title_color]" type="text" id="footer_title_color" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'footer_title_color' ) ); ?>" />
+	<?php
 }
 
 function pinboard_copyright_color() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[copyright_color]" type="text" id="copyright_color" value="<?php echo esc_attr( pinboard_get_option( 'copyright_color' ) ); ?>" style="color:#fff" />
-		<div id="color_picker_copyright_color" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function copyrightpickerUpdate(color) {
-			jQuery('#copyright_color').css("background-color", color);
-			jQuery('#copyright_color').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#copyright_color').focus(function() {
-				$('#color_picker_copyright_color').show();
-			});
-			$('#copyright_color').blur(function() {
-				$('#color_picker_copyright_color').hide();
-			});
-			var copyright_color = $.farbtastic('#color_picker_copyright_color', copyrightpickerUpdate);	
-			copyright_color.setColor('<?php echo pinboard_get_option( 'copyright_color' ); ?>');
-			copyright_color.linkTo(copyrightpickerUpdate);         
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[copyright_color]" type="text" id="copyright_color" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'copyright_color' ) ); ?>" />
+	<?php
 }
 
 function pinboard_copyright_links_color() { ?>
-	<div style="position:relative;">
-		<input name="pinboard_theme_options[copyright_links_color]" type="text" id="copyright_links_color" value="<?php echo esc_attr( pinboard_get_option( 'copyright_links_color' ) ); ?>" style="color:#fff" />
-		<div id="color_picker_copyright_links_color" style="display:none; position:absolute; top:-85px; left:172px;"></div>
-	</div>
-	<script>
-		function copyrightlpickerUpdate(color) {
-			jQuery('#copyright_links_color').css("background-color", color);
-			jQuery('#copyright_links_color').val(color);
-		}
-		jQuery(document).ready(function($) {
-			$('#copyright_links_color').focus(function() {
-				$('#color_picker_copyright_links_color').show();
-			});
-			$('#copyright_links_color').blur(function() {
-				$('#color_picker_copyright_links_color').hide();
-			});
-			var copyright_links_color = $.farbtastic('#color_picker_copyright_links_color', copyrightlpickerUpdate);	
-			copyright_links_color.setColor('<?php echo pinboard_get_option( 'copyright_links_color' ); ?>');
-			copyright_links_color.linkTo(copyrightlpickerUpdate);         
-		});
-	</script>
-<?php
+	<input name="pinboard_theme_options[copyright_links_color]" type="text" id="copyright_links_color" class="wp-color-picker" value="<?php echo esc_attr( pinboard_get_option( 'copyright_links_color' ) ); ?>" />
+	<?php
 }
 function pinboard_seo_settings_sections() {
 	add_settings_section( 'pinboard_home_tags', __( 'Home Page', 'pinboard' ), 'pinboard_home_tags', 'pinboard_options' );
@@ -1469,7 +1036,7 @@ function pinboard_validate_theme_options( $input ) {
 	} elseif( isset( $input['submit-design'] ) || isset( $input['reset-design'] ) ) {
 		$input['page_background'] = substr( $input['page_background'], 0, 7 );
 		$input['menu_background'] = substr( $input['menu_background'], 0, 7 );
-		$input['menu_item_hover_background'] = substr( $input['menu_item_hover_background'], 0, 7 );
+		$input['submenu_background'] = substr( $input['submenu_background'], 0, 7 );
 		$input['sidebar_wide_background'] = substr( $input['sidebar_wide_background'], 0, 7 );
 		$input['content_background'] = substr( $input['content_background'], 0, 7 );
 		$input['post_meta_background'] = substr( $input['post_meta_background'], 0, 7 );
@@ -1484,7 +1051,11 @@ function pinboard_validate_theme_options( $input ) {
 			$input['layout_columns'] = pinboard_get_option( 'layout_columns' );
 		$input['hide_sidebar'] = ( isset( $input['hide_sidebar'] ) ? true : false );
 		$input['hide_footer_area'] = ( isset( $input['hide_footer_area'] ) ? true : false );
-		$input['user_css'] = esc_html( $input['user_css'] );
+		$input['user_css'] = strip_tags( $input['user_css'] );
+		$input['user_css'] = str_replace( 'behavior', '', $input['user_css'] );
+		$input['user_css'] = str_replace( 'expression', '', $input['user_css'] );
+		$input['user_css'] = str_replace( 'binding', '', $input['user_css'] );
+		$input['user_css'] = str_replace( '@import', '', $input['user_css'] );
 	} elseif( isset( $input['submit-typography'] ) || isset( $input['reset-typography'] ) ) {
 		$fonts = pinboard_available_fonts();
 		$units = array( 'px', 'pt', 'em', '%' );

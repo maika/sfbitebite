@@ -29,5 +29,6 @@
 		<?php if( ( 'no-sidebars' != pinboard_get_option( 'layout' ) ) && ( 'full-width' != pinboard_get_option( 'layout' ) ) ) : ?>
 			<?php get_sidebar(); ?>
 		<?php endif; ?>
+		<div class="clear"></div>
 	</div><!-- #container -->
 <?php get_footer(); ?>

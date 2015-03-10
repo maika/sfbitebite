@@ -3,6 +3,8 @@
 Template Name: Content / Sidebar
 */
 ?><?php get_header(); ?>
+	<?php global $pinboard_page_template; ?>
+	<?php $pinboard_page_template = 'template-content-sidebar.php'; ?>
 	<div id="container">
 		<section id="content" class="column twothirdcol">
 			<?php if( have_posts() ) : the_post(); ?>
