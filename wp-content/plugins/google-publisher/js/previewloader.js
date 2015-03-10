@@ -1,20 +1,20 @@
 /*
 Copyright 2013 Google Inc. All Rights Reserved.
 
-This file is part of the Google Publisher Plugin.
+This file is part of the AdSense Plugin.
 
-The Google Publisher Plugin is free software:
+The AdSense Plugin is free software:
 you can redistribute it and/or modify it under the terms of the
 GNU General Public License as published by the Free Software Foundation,
 either version 2 of the License, or (at your option) any later version.
 
-The Google Publisher Plugin is distributed in the hope that it
+The AdSense Plugin is distributed in the hope that it
 will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
 of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
 Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with the Google Publisher Plugin.
+along with the AdSense Plugin.
 If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -30,6 +30,14 @@ googlePublisherPluginPreviewLoader.FRONTEND_URL =
 
 
 /**
+ * Indicates if the preview injector script has been loaded. True if it
+ * has; false otherwise.
+ * @type {boolean}
+ */
+googlePublisherPluginPreviewLoader.previewInjectorScriptLoaded = false;
+
+
+/**
  * Callback to handle postMessage calls.
  *
  * @param {Object} event The postMessage event.
@@ -40,12 +48,14 @@ googlePublisherPluginPreviewLoader.receiveMessage = function(event) {
   }
   var data = /** @type {PostMessageData} */ (JSON.parse(event.data));
   if (data.action == 'load_script' &&
-      data.relativeScriptSrc.indexOf('/_/publisher_plugin/') == 0) {
+      data.relativeScriptSrc.indexOf('/_/publisher_plugin/') == 0 &&
+      !googlePublisherPluginPreviewLoader.previewInjectorScriptLoaded) {
     var script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = 'https://www.gstatic.com' +
         data.relativeScriptSrc;
     document.body.appendChild(script);
+    googlePublisherPluginPreviewLoader.previewInjectorScriptLoaded = true;
   }
 };
 

@@ -2,20 +2,20 @@
 /*
 Copyright 2013 Google Inc. All Rights Reserved.
 
-This file is part of the Google Publisher Plugin.
+This file is part of the AdSense Plugin.
 
-The Google Publisher Plugin is free software:
+The AdSense Plugin is free software:
 you can redistribute it and/or modify it under the terms of the
 GNU General Public License as published by the Free Software Foundation,
 either version 2 of the License, or (at your option) any later version.
 
-The Google Publisher Plugin is distributed in the hope that it
+The AdSense Plugin is distributed in the hope that it
 will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
 of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
 Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with the Google Publisher Plugin.
+along with the AdSense Plugin.
 If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -37,6 +37,9 @@ class GooglePublisherPluginAdmin {
   /** Used to generate and check nonce on the cms command action. */
   const CMS_COMMAND_ACTION = "cms_command_action";
 
+  /** Used to generate and check nonce on the metabox. */
+  const METABOX_ACTION = "disable_ads_metabox_action";
+
   /** A relative URL to plugin administration page. */
   const ADMIN_PAGE_LOCATION = 'options-general.php?page=GooglePublisherPlugin';
 
@@ -50,6 +53,10 @@ class GooglePublisherPluginAdmin {
     $this->plugin_version = $plugin_version;
     $this->configuration = $configuration;
     add_action('admin_menu', array($this, 'addAdminMenu'));
+    if (count($configuration->get()) > 0) {
+      add_action('add_meta_boxes', array($this, 'addPageEditOptions'));
+      add_action('save_post', array($this, 'savePageEditOptions'));
+    }
     add_filter(
         'plugin_action_links_' . GooglePublisherPlugin::$basename,
         array($this, 'addSettingsLink'), 10, 1);
@@ -66,17 +73,61 @@ class GooglePublisherPluginAdmin {
     $environment['pluginVersion'] = $this->plugin_version;
     $environment['wpVersion'] = $wp_version;
     $environment['hl'] = get_locale();
+    $environment['updateSupport'] = $this->configuration->getUpdateSupport();
     return $environment;
   }
 
   public function addAdminMenu() {
     $page = add_options_page(
         'Options',
-        'Google Publisher Plugin',
+        'AdSense',
         'manage_options',
         'GooglePublisherPlugin', array($this, 'onAdminMenu'));
      // Only enqueue the admin CSS on the Google Publisher Plugin admin page.
      add_action('admin_print_styles-' . $page, array($this, 'enqueueAdminCss'));
+  }
+
+  public function addPageEditOptions() {
+    add_meta_box('googlePublisherPluginMetaBox',
+        __('AdSense Plugin', 'google-publisher-plugin'),
+        array($this, 'showPageEditOptions'), 'page', 'side', 'low');
+  }
+
+  public function showPageEditOptions() {
+    global $post;
+    $exclude_ads = get_post_meta($post->ID,
+        GooglePublisherPluginUtils::EXCLUDE_ADS_METADATA, true);
+    wp_nonce_field(self::METABOX_ACTION, 'gppMetaboxNonce');
+
+    if ($exclude_ads) {
+      $exclude_checked = ' checked';
+    } else {
+      $exclude_checked = '';
+    }
+    echo '<input type="checkbox" name="gppDisableAds"',
+        ' id="google-publisher-plugin-disable-ads" value="yes"',
+        $exclude_checked, '/>',
+        __('Disable ads on this page', 'google-publisher-plugin');
+  }
+
+  public function savePageEditOptions($post_id) {
+    // If googlePublisherPluginMetabox has not been inserted then the nonce will
+    // not have been set and the function should return.
+    if (!isset($_POST['gppMetaboxNonce']) ||
+        !wp_verify_nonce($_POST['gppMetaboxNonce'], self::METABOX_ACTION)) {
+      return;
+    } else if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+      return;
+    } else if (!current_user_can('edit_page', $post_id)) {
+      return;
+    } else if (isset($_POST['gppDisableAds']) &&
+        $_POST['gppDisableAds'] == 'yes') {
+      update_post_meta($post_id,
+          GooglePublisherPluginUtils::EXCLUDE_ADS_METADATA, true);
+    } else {
+      delete_post_meta($post_id,
+          GooglePublisherPluginUtils::EXCLUDE_ADS_METADATA);
+    }
   }
 
   public function onAdminMenu() {

@@ -3,8 +3,8 @@ Contributors: sudiptomahato
 Donate link: http://techxt.com/donate
 Tags: Simple social share, social share, Facebook, Like, google, google +1, google plusone, twitter, tweet, facebook share, plusone, linkedin
 Requires at least: 3.0
-Tested up to: 3.7.1
-Stable tag: 1.7.4
+Tested up to: 3.9.2
+Stable tag: 1.7.6
 
 A very simple yet one of the most extensively used social share plugin with vertical scrolling sharebar support.
 

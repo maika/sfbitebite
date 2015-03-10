@@ -2,20 +2,20 @@
 /*
 Copyright 2013 Google Inc. All Rights Reserved.
 
-This file is part of the Google Publisher Plugin.
+This file is part of the AdSense Plugin.
 
-The Google Publisher Plugin is free software:
+The AdSense Plugin is free software:
 you can redistribute it and/or modify it under the terms of the
 GNU General Public License as published by the Free Software Foundation,
 either version 2 of the License, or (at your option) any later version.
 
-The Google Publisher Plugin is distributed in the hope that it
+The AdSense Plugin is distributed in the hope that it
 will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
 of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
 Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with the Google Publisher Plugin.
+along with the AdSense Plugin.
 If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -25,10 +25,10 @@ if(!defined('ABSPATH')) {
 ?>
 <div id="google-publisher-plugin-admin-wrap" class="wrap">
   <?php if ($show_get_started): ?>
-  <h2><?php esc_html_e('Google Publisher Plugin (beta)', 'google-publisher-plugin') ?></h2>
+  <h2><?php esc_html_e('AdSense Plugin', 'google-publisher-plugin') ?></h2>
 
   <div class="google-publisher-plugin-signin-panel">
-    <p><?php esc_html_e('To use the Google Publisher Plugin, you need to sign in to your Google account.', 'google-publisher-plugin') ?></p>
+    <p><?php esc_html_e('To use the AdSense Plugin, you need to sign in to your Google account.', 'google-publisher-plugin') ?></p>
 
     <p><?php esc_html_e('You should use the Google account that you use for Google products that relate to this site. For example, if you have an AdSense account or a Google Analytics account that you use with this site, use the associated Google account.', 'google-publisher-plugin') ?></p>
 
