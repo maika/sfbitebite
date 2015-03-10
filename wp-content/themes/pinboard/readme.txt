@@ -2,13 +2,13 @@
 Contributors: Daniel Tara
 Tags: blue, brown, gray, green, tan, white,
 light, one-column, two-columns, three-columns, four-columns,
-left-sidebar, right-sidebar, fixed-width, flexible-width,
+left-sidebar, right-sidebar, fixed-layout, fluid-layout, responsive-layout,
 custom-background, custom-colors, custom-header, custom-menu,
 editor-style, featured-images, full-width-template, microformats,
 post-formats, sticky-post, theme-options, threaded-comments, translation-ready
-Requires at least: 3.1
-Tested up to: 3.4.1
-Stable tag: 1.0.6
+Requires at least: 3.9
+Tested up to: 4.1
+Stable tag: 1.1.12
 
 Description: A crafty and elegant theme powered by an advanced theme framework and grid system. With virtually unlimited layout options and styles, ideal for showcasing your portfolio of works or other multimedia elements like images, photo galleries, videos and podcasts.
 
@@ -124,7 +124,6 @@ and sticky posts will appear only in the slider.
 
 = The slider is disproportioned =
 
-
 You need to set a featured image of at least 1140x395 for the slider's proportions to align.
 The slider cannot be given fixed proportions for compatibility with the responsive layout.
 
@@ -200,6 +199,127 @@ The theme is offered free of charge. If someone asked money for it, someone just
 
 == Changelog ==
 
+= 1.1.12 =
+
+* Fixed XSS vulnerability in Theme Options
+* Fixed z-index for navigation menu when slider is active
+* Added support for WP core title rendering
+
+= 1.1.11 =
+
+* Fixed FlexSlider control nav z-index
+
+= 1.1.10 =
+
+* Fixed custom navigation background overlaying header on mobile devices
+* Updated credit links
+
+= 1.1.9 =
+
+* Fixed editor style content margin
+* Cleared floated elements before #container
+* Fixed z-index for navigation menu when slider is active
+* Fixed position of search widget in header on mobile devices
+* Replaced custom MediaElement.js skin with default WP MediaElement skin
+* Fallback to default HTML5 player for audio and video shortcodes on AJAX and infinite scroll navigation
+* Custom MediaElement callback now active only for audio and video post formats
+
+= 1.1.8 =
+
+* Updated FlexSlider to version 2.2.2
+* Moved flexslider(); call to jQuery(window).load();
+* Fixed custom menu item color not displaying on current items
+* Fixed post thumbnails skewed by 1px
+
+= 1.1.7 =
+
+* Fixed thumbnail size on one-column posts in full width layout
+* Updated Theme URI
+* Updated Screenshot with size 880x660
+
+= 1.1.6 =
+
+* Fixed four columns layout in Firefox and IE
+* Fixed option for teaser post title font size
+* Updated FlexSlider to version 2.2
+* Updated Colorbox to version 1.5.9
+* Updated InfiniteScroll to version 2.0.2
+
+= 1.1.5 =
+
+* Replaced custom HTML5 gallery shortcode with WP 3.9 HTML5 gallery and caption
+* Fixed visual CSS inconsistencies with HTML5 gallery and caption shortcodes
+* Fixed padding on search pages with no results
+* Fixed page title not appearing on search pages
+* Removed theme bundled Masonry and ImagesLoaded script and replaced with core bundled script
+
+= 1.1.4 =
+
+* Fixed Google Web Fonts not rendering
+* Updated fidvids.js script to version 1.1
+
+= 1.1.3 =
+
+* Fixed bug with jQuery Masonry and AJAX Navigation
+* Fixed '//' in URL on serach results pages
+* Fixed margin-top for Search Widget in Header Sidebar
+* Replaced .post selector with .hentry in JavaScript
+* Added callbacks for MediaElement Player, FitVids and Colorbox to AJAX Navigation
+* Added clearfix to 404 page
+* Updated new 3.8 tags
+
+= 1.1.2 =
+
+* Fixed bug with jQuery Masonry and Infinite Scroll
+
+= 1.1.1 =
+
+* Fixed custom content color not displaying on 404 page
+* Reduced FitVids.js selectors to embeds from select services to avoid interference with custom iframes
+* Replaced .post selector with .hentry for Infinite Scroll script to target all post types
+* Removed bundled MediaElement script and added support for WP MediaElement
+* Updated Colorbox script to v1.4.29
+* Updated Masonry script to v3.1.2
+* Updated Infinite Scroll script to v2.0b2.120519
+* Removed depedency for jQuery Migrate script
+
+= 1.1.0 =
+
+* Fixed margins for Header Sidebar
+* Fixed full width blog not spanning on two columns on tablets in landscape mode
+* Fixed sidebar columns for custom page templates
+* Images in lightbox are scaled to screen dimensions
+
+= 1.0.9 =
+
+* Added version_compare() check for jquery-migrate
+
+= 1.0.8 =
+
+* Replaced masonry() selector with .hentry to match all post types
+* Removed styling of <ins> tag for better compatibility with Google AdSense
+* Using core bundled jQuery Migrate
+* Allow use of Jetpack Tiled Galleries Module
+* Allow use of the > sign in custom CSS
+* Fixed document title bug on blog pages with static front page
+* Fixed navicon displaying out of context on mobile
+* Fixed search form overlapping navigation on mobile
+* Fixed slider controls overlapping navigation on mobile
+* Fixed uncleared floats on static front page with full width layout
+
+= 1.0.7 =
+
+* Fixed header image stretching full width
+* Fixed title of first slide not displaying
+* Theme option not present in database returns default value
+* Enabled header image flexible height
+* Updated color picker to WP Color Picker
+* Enabled post thumbnails for all post types
+* Made layout borders blend into custom color scheme
+* Added background color option for submenus
+* Changed default layout when sidebar is inactive from no-sidebars to full-width
+* Added compatibility code for jQuery 1.9
+
 = 1.0.6 =
 
 * Slider now displays on blog page and landing page template
@@ -233,10 +353,12 @@ The theme is offered free of charge. If someone asked money for it, someone just
 * Added bottom margin to header widget to increase space from navigation when it is pushed down by site title.
 
 = 1.0.2 =
+
 * Fixed invalid CSS error
 * Replaced get_bloginfo( 'stylesheet_url' ) with get_stylesheet_uri()
 * Placed html5shiv script in a callback
 * Provided non-minified versions of scripts
 
 = 1.0 =
+
 * Initial Release
